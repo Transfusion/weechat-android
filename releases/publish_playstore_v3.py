@@ -30,6 +30,8 @@ def upload():
         result = edit_request.execute()
         edit_id = result['id']
 
+        raise Exception("boo")
+
         apk_response = service.edits().apks().upload(
                 editId=edit_id,
                 packageName=PACKAGE_NAME,
@@ -62,8 +64,8 @@ def upload():
 
 
 if __name__ == '__main__':
-    if os.environ.get('TRAVIS_BRANCH', 'undefined') != 'master':
-        raise Exception("Won't publish play store app for any branch except master")
+    # if os.environ.get('TRAVIS_BRANCH', 'undefined') != 'master':
+    #     raise Exception("Won't publish play store app for any branch except master")
 
     if os.environ.get('TRAVIS_PULL_REQUEST', None) != "false":
         raise Exception("Won't publish play store app for pull requests")
