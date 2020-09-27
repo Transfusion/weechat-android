@@ -7,6 +7,7 @@
 # pip install google-auth google-auth-httplib2 google-api-python-client oauth2client
 
 import os
+import httplib2
 import googleapiclient.discovery
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -27,7 +28,7 @@ def credentials():
 
 def upload():
     with googleapiclient.discovery.build("androidpublisher", "v3",
-                                         credentials=credentials()) as service:
+                                         http=credentials().authorize(httplib2.Http())) as service:
         edit_request = service.edits().insert(body={}, packageName=PACKAGE_NAME)
         result = edit_request.execute()
         edit_id = result['id']
