@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # see https://developers.google.com/android-publisher/api-ref/rest
 # see https://github.com/googleapis/google-api-python-client/blob/master/docs/oauth-server.md#preparing-to-make-an-authorized-api-call
 # see https://github.com/googlesamples/android-play-publisher-api/blob/master/v3/python/basic_upload_apks.py
