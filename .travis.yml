@@ -14,7 +14,7 @@ script: releases/travis_build.sh
 
 after_script:
   - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && releases/publish_s3.sh'
-  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && releases/publish_playstore.py'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && releases/publish_playstore_v3.py'
 
 android:
   components:
