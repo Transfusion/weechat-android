@@ -26,7 +26,7 @@ def credentials():
 
 
 def upload():
-    with googleapiclient.discovery.build('androidpublisher', 'v2',
+    with googleapiclient.discovery.build("androidpublisher", "v3",
                                          credentials=credentials()) as service:
         edit_request = service.edits().insert(body={}, packageName=PACKAGE_NAME)
         result = edit_request.execute()
