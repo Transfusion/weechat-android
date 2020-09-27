@@ -41,7 +41,7 @@ def upload():
 
         version_code = apk_response['versionCode']
 
-        print(f"Version code {version_code} has been uploaded")
+        print("Version code %s has been uploaded" % version_code)
 
         track_response = service.edits().tracks().update(
             editId=edit_id,
@@ -58,11 +58,11 @@ def upload():
                 ]
             }).execute()
 
-        print(f"Track {track_response['track']} is set with releases: {track_response['releases']}")
+        print("Track %s is set with releases: %s" % (track_response['track'], track_response['releases']))
 
         commit_request = service.edits().commit(editId=edit_id, packageName=PACKAGE_NAME).execute()
 
-        print(f"Edit {commit_request['id']} has been committed")
+        print("Edit %s has been committed" % commit_request['id'])
 
 
 if __name__ == '__main__':
