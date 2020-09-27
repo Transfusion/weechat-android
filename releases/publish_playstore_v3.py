@@ -38,8 +38,6 @@ def upload():
         result = edit_request.execute()
         edit_id = result['id']
 
-        raise Exception("boo")
-
         apk_response = service.edits().apks().upload(
                 editId=edit_id,
                 packageName=PACKAGE_NAME,
@@ -65,6 +63,8 @@ def upload():
             }).execute()
 
         print("Track %s is set with releases: %s" % (track_response['track'], track_response['releases']))
+
+        raise Exception("boo")
 
         commit_request = service.edits().commit(editId=edit_id, packageName=PACKAGE_NAME).execute()
 
