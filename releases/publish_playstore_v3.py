@@ -26,9 +26,14 @@ def credentials():
             scopes=['https://www.googleapis.com/auth/androidpublisher'])
 
 
+# googleapiclient.discovery incorrectly closes http (calls self._http.http.close()),
+# so don't use the context manager returned by build()
 def upload():
-    with googleapiclient.discovery.build("androidpublisher", "v3",
-                                         http=credentials().authorize(httplib2.Http())) as service:
+    http = httplib2.Http()
+    http = credentials().authorize(http)
+    service = googleapiclient.discovery.build("androidpublisher", "v3", http=http)
+
+    try:
         edit_request = service.edits().insert(body={}, packageName=PACKAGE_NAME)
         result = edit_request.execute()
         edit_id = result['id']
@@ -64,6 +69,9 @@ def upload():
         commit_request = service.edits().commit(editId=edit_id, packageName=PACKAGE_NAME).execute()
 
         print("Edit %s has been committed" % commit_request['id'])
+
+    finally:
+        http.close()
 
 
 if __name__ == '__main__':
